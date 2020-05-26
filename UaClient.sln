@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Library", "UaClie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebOPC", "SimpleWebOPC\SimpleWebOPC.csproj", "{5C7505E8-2034-4371-A3B7-74AED2210A0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusCommunication", "ConsoleApp1\ModbusCommunication.csproj", "{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{5C7505E8-2034-4371-A3B7-74AED2210A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C7505E8-2034-4371-A3B7-74AED2210A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C7505E8-2034-4371-A3B7-74AED2210A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
