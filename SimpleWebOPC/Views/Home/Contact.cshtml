@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<div id="sample">
+    Testing IB0 
+</div>
+
+<div id="DB11_DBB6_0">
+    Testing DB11.DBB6.0
+</div>
+
+
+<script>
+
+    setInterval(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Add")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#sample').html(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, 500);
+</script>
+
+<script>
+
+    setInterval(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("DB11_DBB6_0")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#DB11_DBB6_0').html(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, 500);
+</script>
+
+
+
