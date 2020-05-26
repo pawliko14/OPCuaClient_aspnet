@@ -2,8 +2,7 @@
     ViewBag.Title = "Contact";
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
+<script src="~/Scripts/pureknob.js"></script>
 <h2> IB0 0-120% rate</h2>
 <div id="sample">
     Testing IB0
@@ -17,8 +16,56 @@
 
 <h2> Key position</h2>
 <div id="Key_pos">
-   position
+    position
 </div>
+
+<h2> mod comm</h2>
+<div id="modbus_val">
+    doublr wh
+</div>
+
+<div id="knob">
+
+</div>
+
+<script>
+    // Create knob element, 300 x 300 px in size.
+    const knob = pureknob.createKnob(200, 200);
+
+    // Set properties.
+    knob.setProperty('angleStart', -0.75 * Math.PI);
+    knob.setProperty('angleEnd', 0.75 * Math.PI);
+    knob.setProperty('colorFG', '#88ff88');
+    knob.setProperty('trackWidth', 0.4);
+    knob.setProperty('valMin', 0);
+    knob.setProperty('valMax', 100);
+
+    // Set initial value.
+    knob.setValue(50);
+
+    /*
+     * Event listener.
+     *
+     * Parameter 'knob' is the knob object which was
+     * actuated. Allows you to associate data with
+     * it to discern which of your knobs was actuated.
+     *
+     * Parameter 'value' is the value which was set
+     * by the user.
+     */
+    const listener = function (knob, value) {
+        console.log(value);
+    };
+
+    knob.addListener(listener);
+
+    // Create element node.
+    const node = knob.node();
+
+    // Add it to the DOM.
+    const elem = document.getElementById('knob');
+    elem.appendChild(node);
+</script>
 
 
 <script>
@@ -76,6 +123,25 @@
             });
         });
     }, refresh_interval);
+
+        setInterval(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("ModbusCommunication")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#modbus_val').html(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, refresh_interval);
+
+   
 </script>
 
 

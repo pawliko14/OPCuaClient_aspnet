@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using Opc.Ua;
 using Opc.Ua.Client;
 using Siemens.UAClientHelper;
+using SimpleWebOPC.ModbusCommunication;
+
+
 
 namespace SimpleWebOPC.Controllers
 {
@@ -16,6 +19,8 @@ namespace SimpleWebOPC.Controllers
     {
         public ActionResult Index()
         {
+        
+         
             return View();
         }
 
@@ -35,6 +40,17 @@ namespace SimpleWebOPC.Controllers
 
         }
 
+        [HttpPost]
+        public double ModbusCommunication()
+        {
+            double var = 0;
+       //     Communication modbusCommunication = new Communication();
+       //     modbusCommunication.CreateConnection();
+
+       //     var = modbusCommunication.ReadValues();
+
+            return var;
+        }
 
         [HttpPost]
         public int Add()
