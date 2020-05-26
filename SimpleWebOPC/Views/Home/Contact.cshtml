@@ -3,19 +3,27 @@
 }
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
+<h2> IB0 0-120% rate</h2>
 <div id="sample">
-    Testing IB0 
+    Testing IB0
 </div>
 
-<div id="DB11_DBB6_0">
+<h2> Active Work mode</h2>
+<div id="Work_mode">
     Testing DB11.DBB6.0
 </div>
 
 
+<h2> Key position</h2>
+<div id="Key_pos">
+   position
+</div>
+
+
 <script>
+
+    var refresh_interval = 500;
 
     setInterval(function () {
         $(document).ready(function () {
@@ -32,28 +40,42 @@
                 }
             });
         });
-    }, 500);
-</script>
+    }, refresh_interval);
 
-<script>
 
-    setInterval(function () {
+     setInterval(function () {
         $(document).ready(function () {
 
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("DB11_DBB6_0")",
+                url: "@Url.Action("Work_mode")",
                 dataType: "text",
                 success: function (msg) {
-                    $('#DB11_DBB6_0').html(msg);
+                    $('#Work_mode').html(msg);
                 },
                 error: function (req, status, error) {
                     alert(error);
                 }
             });
         });
-    }, 500);
-</script>
+    }, refresh_interval);
 
+    setInterval(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Key_pos")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#Key_pos').html(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, refresh_interval);
+</script>
 
 
