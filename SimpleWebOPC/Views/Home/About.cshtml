@@ -1,17 +1,29 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
 
+<div id="ProgName"></div>
 
-<div id="test">
+<script>
+    var refresh_interval = 500;
 
-    <h2>@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
 
-</div>
+          setInterval(function () {
+        $(document).ready(function () {
 
-<p>Use this area to provide additional information.</p>
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Prog_name")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#ProgName').html(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, refresh_interval);
 
+ </script>

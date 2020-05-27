@@ -32,6 +32,21 @@
 
 </div>
 
+<h2>Spindle status</h2>
+<div id="Spindle">
+
+</div>
+
+<h2>Feed status</h2>
+<div id="Feed">
+
+</div>
+
+<h2>Current program name</h2>
+<div id="ProgName">
+
+</div">
+
 
 <script>
     var refresh_interval = 500;
@@ -81,8 +96,9 @@
 
 </script>
 
+
 <script>
-    var refresh_interval = 500;
+      var refresh_interval = 500;
 
     //KNOB 1
     // Create knob element, 300 x 300 px in size.
@@ -130,7 +146,62 @@
         });
     }, refresh_interval);
 
+</script>
 
+<script>
+    var refresh_interval = 500;
+
+
+          setInterval(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Prog_name")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#ProgName').html(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, refresh_interval);
+
+         setInterval(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("feed_start_stop")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#Feed').html(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, refresh_interval);
+  
+       setInterval(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("spindle_start_stop")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#Spindle').html(msg);
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, refresh_interval);
 
 
 

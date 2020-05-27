@@ -244,20 +244,44 @@ namespace SimpleWebOPC.Controllers
             return val;
         }
 
-        [HttpPost] //Spindle start
-        public string Q2_1()
+        [HttpPost] //Spindle start / stop
+        public string spindle_start_stop()
         {
-            string val = null;
-            val = Spindle_start();
-            return val;
+            string spindle_start_val = Spindle_start();
+            string spindle_stop_val = Spindle_stop();
+
+            if (spindle_start_val.Equals("True") && spindle_stop_val.Equals("False"))
+            {
+                return "Spindle Start";
+            }
+            else if (spindle_stop_val.Equals("True") && spindle_start_val.Equals("False"))
+            {
+                return "Spindle stop";
+            }
+            else
+            {
+                return "wrong spindle setting!";
+            }       
         }
 
-        [HttpPost] //Spindle stop
-        public string Q2_0()
+        [HttpPost] //Spindle start / stop
+        public string feed_start_stop()
         {
-            string val = null;
-            val = Spindle_stop();
-            return val;
+            string feed_start_val = Feed_start();
+            string feed_stop_val = Feed_stop();
+
+            if (feed_start_val.Equals("True") && feed_stop_val.Equals("False"))
+            {
+                return "Feed Start";
+            }
+            else if (feed_stop_val.Equals("True") && feed_start_val.Equals("False"))
+            {
+                return "Feed stop";
+            }
+            else
+            {
+                return "wrong Feed setting!";
+            }
         }
 
         [HttpPost] // List of axis movements
@@ -269,6 +293,15 @@ namespace SimpleWebOPC.Controllers
             return axis_list;
         }
 
+        [HttpPost] //feed stop
+        public string Prog_name()
+        {
+            string val = null;
+            val = Read_prog_name();
+            return val;
+        }
+
+        
 
         /*
          * 
@@ -533,5 +566,20 @@ namespace SimpleWebOPC.Controllers
 
             return axis_results;
         }
+
+
+        private string Read_prog_name()
+        {
+            List<string> nodesToRead = new List<string>();
+            List<string> results = new List<string>();
+
+            nodesToRead.Add(new NodeId("/Channel/ProgramInfo/selectedWorkPProg[u1,1]", 2).ToString());
+
+            results = OpcUastartup.get_m_server().ReadValues(nodesToRead);
+
+
+            return results[0];
+        }
+
     }
 }
