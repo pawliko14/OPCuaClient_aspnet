@@ -28,59 +28,48 @@
 
 </div>
 
+<div id="knob2">
+
+</div>
+
+
 <script>
+    var refresh_interval = 500;
+
+    //KNOB 2
+
     // Create knob element, 300 x 300 px in size.
-    const knob = pureknob.createKnob(200, 200);
+    const knob2 = pureknob.createKnob(100, 100);
 
-    // Set properties.
-    knob.setProperty('angleStart', -0.75 * Math.PI);
-    knob.setProperty('angleEnd', 0.75 * Math.PI);
-    knob.setProperty('colorFG', '#88ff88');
-    knob.setProperty('trackWidth', 0.4);
-    knob.setProperty('valMin', 0);
-    knob.setProperty('valMax', 100);
+    knob2.setProperty('angleStart', -0.75 * Math.PI);
+    knob2.setProperty('angleEnd', 0.75 * Math.PI);
+    knob2.setProperty('colorFG', '#88ff88');
+    knob2.setProperty('trackWidth', 0.4);
+    knob2.setProperty('valMin', 0);
+    knob2.setProperty('valMax', 120);
 
-    // Set initial value.
-    knob.setValue(50);
+    knob2.setValue(50);
 
-    /*
-     * Event listener.
-     *
-     * Parameter 'knob' is the knob object which was
-     * actuated. Allows you to associate data with
-     * it to discern which of your knobs was actuated.
-     *
-     * Parameter 'value' is the value which was set
-     * by the user.
-     */
-    const listener = function (knob, value) {
+
+    const listener2 = function (knob2, value) {
         console.log(value);
     };
 
-    knob.addListener(listener);
+    knob2.addListener(listener2);
+    const node2 = knob2.node();
+    const elem2 = document.getElementById('knob2');
+    elem2.appendChild(node2);
 
-    // Create element node.
-    const node = knob.node();
-
-    // Add it to the DOM.
-    const elem = document.getElementById('knob');
-    elem.appendChild(node);
-</script>
-
-
-<script>
-
-    var refresh_interval = 500;
-
-    setInterval(function () {
+          setInterval(function () {
         $(document).ready(function () {
 
             $.ajax({
                 type: "POST",
-                url: "@Url.Action("Add")",
+                url: "@Url.Action("IB0")",
                 dataType: "text",
                 success: function (msg) {
-                    $('#sample').html(msg);
+                    knob2.setValue(msg);
+
                 },
                 error: function (req, status, error) {
                     alert(error);
@@ -88,6 +77,61 @@
             });
         });
     }, refresh_interval);
+
+
+</script>
+
+<script>
+    var refresh_interval = 500;
+
+    //KNOB 1
+    // Create knob element, 300 x 300 px in size.
+    const knob = pureknob.createKnob(100, 100);
+
+    knob.setProperty('angleStart', -0.75 * Math.PI);
+    knob.setProperty('angleEnd', 0.75 * Math.PI);
+    knob.setProperty('colorFG', '#88ff88');
+    knob.setProperty('trackWidth', 0.4);
+    knob.setProperty('valMin', 0);
+    knob.setProperty('valMax', 120);
+
+    knob.setValue(50);
+
+
+    const listener = function (knob, value) {
+        console.log(value);
+    };
+
+    knob.addListener(listener);
+    const node = knob.node();
+    const elem = document.getElementById('knob');
+    elem.appendChild(node);
+
+
+
+
+
+    setInterval(function () {
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("IB3")",
+                dataType: "text",
+                success: function (msg) {
+                    $('#sample').html(msg);
+                    knob.setValue(msg);
+
+                },
+                error: function (req, status, error) {
+                    alert(error);
+                }
+            });
+        });
+    }, refresh_interval);
+
+
+
 
 
      setInterval(function () {
@@ -141,7 +185,7 @@
         });
     }, refresh_interval);
 
-   
+
 </script>
 
 

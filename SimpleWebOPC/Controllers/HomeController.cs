@@ -19,14 +19,14 @@ namespace SimpleWebOPC.Controllers
     {
         public ActionResult Index()
         {
-        
-         
+
+
             return View();
         }
 
         public ActionResult About()
         {
-           
+
             return View();
         }
 
@@ -35,7 +35,7 @@ namespace SimpleWebOPC.Controllers
             string IB0 = null;
             IB0 = Read_IB3();
             ViewBag.Message = "wartosc ->  IB0: " + IB0;
-            
+
             return View();
 
         }
@@ -44,25 +44,25 @@ namespace SimpleWebOPC.Controllers
         public double ModbusCommunication()
         {
             double var = 0;
-       //     Communication modbusCommunication = new Communication();
-       //     modbusCommunication.CreateConnection();
+            //     Communication modbusCommunication = new Communication();
+            //     modbusCommunication.CreateConnection();
 
-       //     var = modbusCommunication.ReadValues();
+            //     var = modbusCommunication.ReadValues();
 
             return var;
         }
 
         [HttpPost]
-        public int Add()
+        public int IB3()
         {
-            string IB0 = null;
+            string IB3 = null;
 
             int resolution = 120 / 23;
 
-            IB0 = Read_IB3();
-            ViewBag.Message = "wartosc ->  IB0: " + IB0;
+            IB3 = Read_IB3();
+            ViewBag.Message = "wartosc ->  IB0: " + IB3;
 
-            int result = int.Parse(IB0);
+            int result = int.Parse(IB3);
             int inv = 0;
 
 
@@ -73,6 +73,33 @@ namespace SimpleWebOPC.Controllers
             return inv * resolution;
 
         }
+
+        [HttpPost]
+        public int IB0()
+        {
+            int resolution = 120 / 15;
+
+
+            string val = Read_IB0();
+
+            int value = Int32.Parse(val);
+
+            string Greyed = Convert.ToString(value, 2);
+            string binary = Greyed.Substring(0, 4);
+            string result = Convert.ToInt32(binary, 2).ToString();
+            int result_int = int.Parse(result);
+            int inv = 0;
+
+            // Taking xor until n becomes zero 
+            for (; result_int != 0; result_int = result_int >> 1)
+                inv ^= result_int;
+
+
+            return inv * resolution;
+
+        }
+
+      
 
         [HttpPost] // auto
         public string DB11_DBB6_0()
@@ -114,21 +141,21 @@ namespace SimpleWebOPC.Controllers
             string Auto = Read_DB11_DBB6_0();
             string MDA = Read_DB11_DBB6_1();
             string Jog = Read_DB11_DBB6_2();
-            string refpoint = Read_DB11_DBB7_2(); 
+            string refpoint = Read_DB11_DBB7_2();
 
-            if(Auto.Equals("True") && Jog.Equals("False"))
+            if (Auto.Equals("True") && Jog.Equals("False"))
             {
                 mode = "Auto Mode";
             }
-            else if( MDA.Equals("True") && Jog.Equals("False"))
+            else if (MDA.Equals("True") && Jog.Equals("False"))
             {
                 mode = "MDA mode";
             }
-            else if(Jog.Equals("True") && refpoint.Equals("False"))
+            else if (Jog.Equals("True") && refpoint.Equals("False"))
             {
                 mode = "Jog mode";
             }
-            else if(Jog.Equals("True") && refpoint.Equals("True") )
+            else if (Jog.Equals("True") && refpoint.Equals("True"))
             {
                 mode = "ref & jog mode";
             }
@@ -147,14 +174,14 @@ namespace SimpleWebOPC.Controllers
             string pos2 = Read_DB10_DBX56_6();
             string pos3 = Read_DB10_DBX56_7();
 
-            if(pos1.Equals("True") && pos2.Equals("False") && pos3.Equals("False"))
+            if (pos1.Equals("True") && pos2.Equals("False") && pos3.Equals("False"))
             {
                 final_pos = "Position 1";
             }
             else if (pos1.Equals("False") && pos2.Equals("True") && pos3.Equals("False"))
             {
                 final_pos = "Position 2";
-                 
+
             }
             else if (pos1.Equals("False") && pos2.Equals("False") && pos3.Equals("True"))
             {
@@ -167,7 +194,7 @@ namespace SimpleWebOPC.Controllers
             return final_pos;
         }
 
-      
+
 
         [HttpPost] //Prog running
         public string DB20_DBX35_0()
@@ -250,7 +277,7 @@ namespace SimpleWebOPC.Controllers
 
         private string Read_IB3()
         {
-            
+
 
             List<string> nodesToRead = new List<string>();
             List<string> results = new List<string>();
@@ -259,17 +286,31 @@ namespace SimpleWebOPC.Controllers
 
             results = OpcUastartup.get_m_server().ReadValues(nodesToRead);
 
-            return results[0]; 
+            return results[0];
+        }
+
+        private string Read_IB0()
+        {
+
+
+            List<string> nodesToRead = new List<string>();
+            List<string> results = new List<string>();
+
+            nodesToRead.Add(new NodeId("/Plc/IB0", 2).ToString());
+
+            results = OpcUastartup.get_m_server().ReadValues(nodesToRead);
+
+            return results[0];
         }
 
         //auto
         private string Read_DB11_DBB6_0()
-        {  
+        {
             List<string> nodesToRead = new List<string>();
             List<string> results = new List<string>();
 
             nodesToRead.Add(new NodeId("/Plc/DB11.DBX6.0", 2).ToString());
-  
+
 
             results = OpcUastartup.get_m_server().ReadValues(nodesToRead);
 
@@ -355,7 +396,7 @@ namespace SimpleWebOPC.Controllers
             return results[0];
         }
 
-        
+
 
         //PROG RUNNING
         private string Read_DB20_DBX35_0()
@@ -415,12 +456,12 @@ namespace SimpleWebOPC.Controllers
             List<string> nodesToRead = new List<string>();
             List<string> results = new List<string>();
 
-             nodesToRead.Add(new NodeId("/Plc/Q1.7", 2).ToString());
+            nodesToRead.Add(new NodeId("/Plc/Q1.7", 2).ToString());
 
-             results = OpcUastartup.get_m_server().ReadValues(nodesToRead);
+            results = OpcUastartup.get_m_server().ReadValues(nodesToRead);
 
 
-            return results[0]; 
+            return results[0];
         }
 
         //Feed stop 

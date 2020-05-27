@@ -34,10 +34,6 @@ namespace SimpleWebOPC
             List<string> nodesToRead = new List<string>();
 
             nodesToRead.Add("ns=0;i=" + Variables.Server_NamespaceArray.ToString());
-            foreach (string nodes in nodesToRead)
-            {
-                Console.WriteLine(nodes);
-            }
         }
 
         private static  void m_Server_CertificateEvent(CertificateValidator validator, CertificateValidationEventArgs e)

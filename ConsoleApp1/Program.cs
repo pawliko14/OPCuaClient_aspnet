@@ -120,13 +120,40 @@ namespace ModbusCommunication
 
         }
 
+        public static void liczGray_to_dec()
+        {
+          
+
+            int value = 144;
+
+
+            string Greyed = Convert.ToString(value, 2);
+            string binary = Greyed.Substring(0, 4);
+            string  result = Convert.ToInt32(binary, 2).ToString();
+            int result_int = int.Parse(result);
+            int inv = 0;
+
+            // Taking xor until n becomes zero 
+            for (; result_int != 0; result_int = result_int >> 1)
+                inv ^= result_int;
+
+
+            Console.WriteLine("afsd"+  inv);
+
+
+
+
+
+        }
+
         static void Main(string[] args)
        {
-            CreateConnection();
-            CheckStatus();
+            liczGray_to_dec();
+          //  CreateConnection();
+           // CheckStatus();
             //ReadValues();
-              Method1();
-             Method2();
+        //      Method1();
+          //   Method2();
              CloseConnection();
 
             Console.ReadKey();
