@@ -28,8 +28,17 @@ namespace SimpleWebOPC
             m_Server = new UAClientHelperAPI();
             m_Server.CertificateValidationNotification += new CertificateValidationEventHandler(m_Server_CertificateEvent);
 
+            try
+            {
+                m_Server.Connect("opc.tcp://192.168.90.39:4840", "none", MessageSecurityMode.SignAndEncrypt, true, "OpcUaClient", "12345678");
+            }
+            catch
+            {
+                Console.WriteLine("Wrong connections data, check opc address and credentials");
+                return;
+            }
 
-            m_Server.Connect("opc.tcp://192.168.90.155:4840", "none", MessageSecurityMode.SignAndEncrypt, true, "OpcUaClient", "SUNRISE");
+
 
             List<string> nodesToRead = new List<string>();
 
