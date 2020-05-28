@@ -1,5 +1,10 @@
 ﻿@{
     ViewBag.Title = "About";
+
+    if (Session["userID"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
 }
 
 

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebOPC", "SimpleWebOP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusCommunication", "ConsoleApp1\ModbusCommunication.csproj", "{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleWebOPCTests", "SimpleWebOPCTests\SimpleWebOPCTests.csproj", "{0ACEFD37-A317-41C8-A081-2392E0A9AE8A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5943BE16-AF8C-4025-99C6-F37CA42B1BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ACEFD37-A317-41C8-A081-2392E0A9AE8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ACEFD37-A317-41C8-A081-2392E0A9AE8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ACEFD37-A317-41C8-A081-2392E0A9AE8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ACEFD37-A317-41C8-A081-2392E0A9AE8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

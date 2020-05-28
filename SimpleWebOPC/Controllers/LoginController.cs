@@ -18,17 +18,23 @@ namespace SimpleWebOPC.Controllers
         [HttpPost]
         public ActionResult Autherize(SimpleWebOPC.Models.OpcUaUser opcUaUser)
         {
-            using (Models.LoginDatabeEntity db = new LoginDatabeEntity())
+            using (OpcUaDatabseEntities1 db = new OpcUaDatabseEntities1())
             {
-                var userDetail = db.OpcUaUsers.Where(x => x.Login.Equals(opcUaUser.Login) && x.Password.Equals(opcUaUser.Password)).FirstOrDefault();
+                var userDetail = db.OpcUaUsers.Where(x => x.Login == opcUaUser.Login && x.Password == opcUaUser.Password).FirstOrDefault();
 
+               
                 if (userDetail == null)
                 {
-                    opcUaUser.LoginErrorMessage = "Wrong username or password";
+                    opcUaUser.TestRow = "Wrong username or password";
                     return View("Index", opcUaUser);
                 }
+                else
+                {
+                    Session["UserID"] = userDetail.Login;
+                    return RedirectToAction("Index", "Home");
+                }
             }
-            return View();
+         
         }
     }
 }

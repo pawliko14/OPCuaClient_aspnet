@@ -140,7 +140,24 @@
     </Compile>
     <Compile Include="ModbusCommunication\Communication.cs" />
     <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\OpcUaUser.cs" />
+    <Compile Include="Models\LoginDatabaseModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoginDatabaseModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginDatabaseModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoginDatabaseModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LoginDatabaseModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LoginDatabaseModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OpcUaUser.cs">
+      <DependentUpon>LoginDatabaseModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UAClientHelperAPI.cs" />
   </ItemGroup>
@@ -157,8 +174,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\LoginDatabaseModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LoginDatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>LoginDatabaseModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\LoginDatabaseModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LoginDatabaseModel.edmx</DependentUpon>
+      <LastGenOutput>LoginDatabaseModel.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="Models\LoginDatabaseModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LoginDatabaseModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\LoginDatabaseModel.edmx.diagram">
+      <DependentUpon>LoginDatabaseModel.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -187,7 +221,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
