@@ -31,6 +31,7 @@ namespace SimpleWebOPC.Controllers
                 else
                 {
                     Session["UserID"] = userDetail.Login;
+                    Session.Timeout = 1;
                     return RedirectToAction("Index", "Home");
                 }
             }

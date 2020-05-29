@@ -17,9 +17,11 @@ namespace SimpleWebOPC.Controllers
 {
     public class HomeController : Controller
     {
+
+
         public ActionResult Index()
         {
-
+            
 
             return View();
         }
@@ -36,9 +38,18 @@ namespace SimpleWebOPC.Controllers
             IB0 = Read_IB3();
             ViewBag.Message = "wartosc ->  IB0: " + IB0;
 
-            return View();
+           return View();
 
         }
+
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+
+            return RedirectToAction("Index", "Login");
+        }
+
+        
 
         [HttpPost]
         public double ModbusCommunication()

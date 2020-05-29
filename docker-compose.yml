@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  simplewebopc:
+    image: ${DOCKER_REGISTRY-}simplewebopc
+    build:
+      context: .\SimpleWebOPC
+      dockerfile: Dockerfile
